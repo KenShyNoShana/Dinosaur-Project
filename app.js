@@ -12,6 +12,61 @@
             this.when = when;
             this.fact = fact;
         }
+
+        heightComparison(dino, human)
+        {
+            const actualHeight = convertHeight(human[0].height);
+            let dif = 0;
+            if(dino.height > actualHeight)
+            {
+                dif = dino.height - actualHeight;
+                return `The ${dino.species} is ${dif} inches taller than you`;
+            }
+            else if(dino.height < actualHeight)
+            {
+                dif = actualHeight - dino.height;
+                return `The ${dino.species} is ${dif} inches shorter than you`;
+            }
+            else
+            {
+                return `The ${dino.species} is exactly as tall as you!`;
+            }
+        }
+
+        weightComparison(dino, human)
+        {
+            let times = 0;
+            console.log(dino.weight, human[0].weight);
+            if(parseFloat(dino.weight) > parseFloat(human[0].weight))
+            {
+                times = parseFloat(dino.weight) / parseFloat(human[0].weight);
+                return `The ${dino.species} is ${times.toFixed(1)} times heavier than you`
+            }
+
+            else if(parseFloat(dino.weight) < parseFloat(human[0].weight))
+            {
+                times = parseFloat(human[0].weight) / parseFloat(dino.weight);
+                return `You are ${times.toFixed(1)} times heavier than the ${dino.species}`
+            }
+
+            else
+            {
+                return `You and the ${dino.species} are equally heavy`;
+            }
+        }
+
+        dietComparison(dino, human)
+        {
+            if(dino.diet === human.diet)
+            {
+                return `The ${dino.species} and you share the same diet`;
+            }
+
+            else
+            {
+                return `Unlike you, the ${dino.species} follows a ${dino.diet} diet!`;
+            }
+        }
     }
 
     // Human class which extends Dino class and includes comparing methods
@@ -106,6 +161,7 @@
 
             for(let i = 0; i < (arr.length + 1); i++)
             {
+                // these two if statements make sure that the loop is not going out of bounds, and the human object is being created
                 if(i > 8)
                 {
                     continue;
@@ -116,6 +172,7 @@
                     arr[i] = human[0];
                 }
 
+                // these lines create the div, h2, img and the two p elements, and append the "grid-item" class to the div
                 let card = document.createElement("div");
                 card.classList.add("grid-item");
                 let heading = document.createElement("h2")
@@ -123,6 +180,7 @@
                 let text = document.createElement("p");
                 let fact = document.createElement("p");
 
+                // the following lines of code are setting the content and style of the created elements
                 heading.textContent = "Species: " + arr[i].species;
 
                 image.src = `./images/${arr[i].species.toLowerCase()}.png`;
@@ -132,9 +190,16 @@
                 text.style.position = "relative";
                 text.style.backgroundColor = "rgba(000,000,000, 0)";
 
-                fact.textContent = `Fact: ${arr[i].fact}`;
-                fact.style.padding = "0.8em, 0.8em, 1.0";
+                // this checks if the dinosaurs (or the pigeon) are being created
+                if(arr[i].species !== "Human")
+                {
+                    // this array contains comparisons between the current dinosaur and the human, 1 fact is then randomly selected as the "textcontent" of the fact
+                    let factArray = [arr[i].heightComparison(arr[i], human), arr[i].weightComparison(arr[i], human), arr[i].dietComparison(arr[i], human), arr[i].fact];
+                    fact.textContent = `${factArray[Math.floor(Math.random() * 4)]}`;
+                    console.log(factArray[1]);
+                }
 
+                // this checks if the human is currently being created and sets specific values differently
                 if(arr[i].species === "Human")
                 {
                     heading.textContent = arr[i].name;
@@ -142,6 +207,7 @@
                     fact.textContent = `${arr[i].compareHeight(arr, human)} ${arr[i].compareWeight(arr, human)} ${arr[i].compareDiet(arr, human)}`;
                 }
 
+                // these lines basically assemble the card and append it to the mainGrid
                 card.appendChild(heading);
                 card.appendChild(text);
                 card.appendChild(image);
