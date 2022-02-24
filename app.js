@@ -57,7 +57,6 @@
             {
                 if(capitalize(dinos[i].species) === "Pigeon")
                 {
-                    console.log(dinos[i].species);
                     break;
                 }
                 if(capitalize(dinos[i].diet) === human[0].diet)
@@ -70,6 +69,7 @@
             {
                 return `No Dinosaur shares your diet :(`;
             }
+
             else
             {
                 return `You share the same diet with ${counter} Dinosaurs`;
@@ -110,10 +110,12 @@
                 {
                     continue;
                 }
+
                 if(i === 8)
                 {
                     arr[i] = human[0];
                 }
+
                 let card = document.createElement("div");
                 card.classList.add("grid-item");
                 let heading = document.createElement("h2")
@@ -146,9 +148,7 @@
                 card.appendChild(fact);
                 mainGrid.appendChild(card);
             }
-
         }
-
 
     /**
      * this function get the data from the .json file and the form data and then creates an array of Dino-objects aswell as an array with one Human-object
@@ -165,7 +165,6 @@
         {
             dinoArray.push(new Dino(dinoStats.Dinos[i].species, parseFloat(dinoStats.Dinos[i].weight), parseInt(dinoStats.Dinos[i].height), dinoStats.Dinos[i].diet, dinoStats.Dinos[i].where, dinoStats.Dinos[i].when, dinoStats.Dinos[i].fact));
         }
-        console.log(dinoArray);
 
         function getFormData()
         {
@@ -175,7 +174,6 @@
             let formData =  Array.from(document.querySelectorAll("#dino-compare input ")).reduce((accumulator, currentValue) => ({ ...accumulator, [currentValue.id] : currentValue.value}), {});
             let diet = document.getElementById("diet");
             formData["diet"] = diet.value;
-            console.log(formData);
             let human = [new Human("Human", formData.weight, (formData.feet + "." + formData.inches), formData.diet, where ="worldwide", when ="21st century", fact ="loves cats", formData.name)];
             return human;
         }
@@ -189,6 +187,7 @@
     // an eventListener on button to submit the form and create the infographic
     const dinoURL = "dino.json";
     const button = document.getElementById("btn");
+
     button.addEventListener("click", function formClick(event)
     {
         event.preventDefault();
