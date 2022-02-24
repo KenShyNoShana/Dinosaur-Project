@@ -202,7 +202,6 @@
                     // this array contains comparisons between the current dinosaur and the human, 1 fact is then randomly selected as the "textcontent" of the fact
                     let factArray = [arr[i].heightComparison(arr[i], human), arr[i].weightComparison(arr[i], human), arr[i].dietComparison(arr[i], human), arr[i].fact];
                     fact.textContent = `${factArray[Math.floor(Math.random() * 4)]}`;
-                    console.log(factArray[1]);
                 }
 
                 // this checks if the human is currently being created and sets specific values differently
