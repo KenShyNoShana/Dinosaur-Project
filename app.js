@@ -17,16 +17,19 @@
         {
             const actualHeight = convertHeight(human[0].height);
             let dif = 0;
+
             if(dino.height > actualHeight)
             {
                 dif = dino.height - actualHeight;
                 return `The ${dino.species} is ${dif} inches taller than you`;
             }
+
             else if(dino.height < actualHeight)
             {
                 dif = actualHeight - dino.height;
                 return `The ${dino.species} is ${dif} inches shorter than you`;
             }
+
             else
             {
                 return `The ${dino.species} is exactly as tall as you!`;
@@ -36,7 +39,7 @@
         weightComparison(dino, human)
         {
             let times = 0;
-            console.log(dino.weight, human[0].weight);
+
             if(parseFloat(dino.weight) > parseFloat(human[0].weight))
             {
                 times = parseFloat(dino.weight) / parseFloat(human[0].weight);
@@ -82,6 +85,7 @@
         {
             let counter = 0;
             const actualHeight = convertHeight(human[0].height);
+
             for(let i = 0; i < dinos.length; i++)
             {
                 if(dinos[i].height > actualHeight)
@@ -95,6 +99,7 @@
         compareWeight(dinos, human)
         {
             let counter = 0;
+
             for(let i = 0; i < dinos.length; i++)
             {
                 if(dinos[i].weight > human[0].weight)
@@ -108,6 +113,7 @@
         compareDiet(dinos, human)
         {
             let counter = 0;
+
             for(let i = 0; i < dinos.length; i++)
             {
                 if(capitalize(dinos[i].species) === "Pigeon")
